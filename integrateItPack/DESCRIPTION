@@ -1,0 +1,8 @@
+Package: integrateItPack
+Title: Integrates area under a curve, using Simpson’s rule and Trapezoid rule
+Version: 0.0.0.9000
+Authors: Matt Malis <malis.matt@gmail.com>
+Description: This packages takes a vector of x and y values as an input, and returns the value of the area under the curve, using either the Trapezoid or Simpson’s rule. Additionally, it can plot the curve, if you’d like!
+Depends: R (>= 3.2.2)
+License: WUSTL
+LazyData: true
