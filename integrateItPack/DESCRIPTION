@@ -1,8 +1,13 @@
 Package: integrateItPack
-Title: Integrates area under a curve, using Simpson’s rule and Trapezoid rule
-Version: 0.0.0.9000
-Authors: Matt Malis <malis.matt@gmail.com>
-Description: This packages takes a vector of x and y values as an input, and returns the value of the area under the curve, using either the Trapezoid or Simpson’s rule. Additionally, it can plot the curve, if you’d like!
-Depends: R (>= 3.2.2)
-License: WUSTL
-LazyData: true
+Title: Adding and subtracting squared values
+Version: 0.1
+Author: Jacob M. Montgomery and Ryan T. Moore
+Maintainer: Ryan T. Moore <rtm@wustl.edu>
+Description: Find sum and difference of squared values
+Depends:
+    R (>= 3.0.0),
+    methods
+License: GPL (>= 2)
+Suggests:
+    devtools
+RoxygenNote: 5.0.1
