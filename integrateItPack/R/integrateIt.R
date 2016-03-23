@@ -4,30 +4,36 @@
 #'
 #'@param xValues A numeric vector of x-values
 #'@param yValues A numeric vector of y-values
-#'@param result A numeric object of the value of the area under curve
-#'@param rule An instruction of whether to calculate the 'result' value using the Trapezoidal rule or Simpson's rule
+#'@param rule An instruction of whether to calculate the 'result' value using the Trapezoidal rule or Simpson's rule; either 'Trap' or 'Simp' (default to 'Trap')
 #'
 #'@return an object of class Trapezoid or Simpson containing
-#' \item{name}{The candidate's name}
-#' \item{delegatesWon}{Number of delegates the candidate has won}
-#' \item{party}{The candidate's party}
-#' \item{delegatesNeeded}{Number of delegates needed for the candidate's party nomination}
+#' \item{xValues}{A numeric vector of x-values}
+#' \item{yValues}{A numeric vector of y-values}
+#' \item{result}{A numeric object of the value of the area under the curve}
 #'@author Matt Malis \email{malis.matt@gmail.com}
-#'@note This function creates a Candidate!
+#'@note This function calculates the area under a curve, two different ways!
 #'@examples 
 #'
-#'cruzCandidate<-createCandidate("Ted Cruz", 135, "Republican")
-#'@seealso \code{\link{totalNeeded}} \code{\link{propNeeded}}  
-#'@rdname createCandidate
-#'@aliases createCandidate,ANY-method 
+#'integral1<-integrateIt(myXvals, myYvals, 'Simp')
+#'@seealso \code{\link{Trapezoid}} \code{\link{Simpson}}  
+#'@rdname integrateIt
+#'@aliases integrateIt,ANY-method 
 #'@export
-setGeneric(name = "createCandidate",
-           def = function(name, delegatesWon, party){
-             standardGeneric("createCandidate")
+setGeneric(name = "integrateIt",
+           def = function(xValues, yValues, rule){
+             standardGeneric("integrateIt")
            })
 #'@export
-setMethod(f = "createCandidate",
-          definition = function(name, delegatesWon, party){
+setMethod(f = "integrateIt",
+          definition = function(xValues, yValues, rule){
+            if(rule %in% c('Trap', 'trap', 'TRAP', 'Trapezoid', 'Trapezoidal')){
+              
+            }
+            else if(rule %in% c('Simp', 'simp', 'SIMP', 'Simpson', 'Simpson's){
+              
+            }
+            else return("Invalid rule. Rule should be either 'Trap' or 'Simp'.")
+            
             return(new("Candidate", name=name, delegatesWon=delegatesWon,
                        party=party))#, delegatesNeeded=totalNeeded(party)))
           })
