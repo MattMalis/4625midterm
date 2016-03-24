@@ -65,3 +65,31 @@ setMethod("initialize", "Simpson",
 print.Simpson<-function(simp){
   paste("Integrated value, according to Simpson's rule, is: ", round(simp@result,3))
 }
+
+#' @export
+plot.Simpson<-function(simp){
+  
+  plot(NULL, xlim=c((min(simp@xValues)-(max(simp@xValues)-min(simp@xValues))/10),  
+                    (max(simp@xValues)+(max(simp@xValues)-min(simp@xValues))/10)), 
+       ## setting xlim and ylim as a function of the min and max x and y values
+       ylim=c((min(simp@yValues)-(max(simp@yValues)-min(simp@yValues))/10),  
+              (max(simp@yValues)+(max(simp@yValues)-min(simp@yValues))/10)),
+       xlab = "x-values", ylab="y-values", main="Integral Approximation with Simpson's Rule"
+  )
+  points(simp@xValues, simp@yValues, pch=21)    
+  
+  for (i in 1:(floor(length(simp@xValues))/2)){
+    model<-lm(simp@yValues[(2*i-1):(2*i+1)] ~ simp@xValues[(2*i-1):(2*i+1)] + (simp@xValues^2)[(2*i-1):(2*i+1)] )
+    quad.coeffs<-coefficients(model)
+    xSeq<-seq(simp@xValues[(2*i-1)],simp@xValues[(2*i+1)],.1)
+    ySeq<-sapply(xSeq, function(x){
+      quad.coeffs[1]+x*quad.coeffs[2]+(x^2)*quad.coeffs[3]
+    })
+    lines(xSeq,ySeq)
+  }
+  
+    segments(simp@xValues[1],simp@yValues[1],simp@xValues[1],0)
+    segments(simp@xValues[length(simp@xValues)],simp@yValues[length(simp@xValues)],simp@xValues[length(simp@xValues)],0)
+    segments(simp@xValues[1],0,simp@xValues[length(simp@xValues)],0)
+    
+  }

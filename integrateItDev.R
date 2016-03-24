@@ -16,7 +16,6 @@ document(current.code)
 
 library(integrateItPack)
 
-
 ?integrateIt
 ?Trapezoid
 
@@ -66,8 +65,12 @@ plot(myNegativeTrap)
 
 
 ## simp should work now
-xVals4<-c(xVals3, 120)
-yVals4<-c(yVals3, 150)
-print(integrateIt(xVals4, yVals4, "Simpson's"))
-
+xVals3<-c(45,63,80,7,99,23)
+yVals3<-c(24,24,6,3,7,35)
+xVals4<-c(15, -20, xVals3, 120)
+yVals4<-c(yVals3, 28, 67, 76)
+mySimp<-integrateIt(xVals4, yVals4, "Simpson's")
+mySimp
+print(mySimp)
+plot(mySimp)
 
