@@ -23,18 +23,10 @@ setClass(Class = "Trapezoid", representation = representation(
     xValues = c(),
     yValues = c(),
     result = c()
-  ))
-
-
-#' @export
-setMethod("initialize", "Trapezoid", 
-          function(.Object, xValues, yValues, result){
-            .Object@xValues<-xValues
-            .Object@yValues<-yValues
-            .Object@result<-result
-            return(.Object)
-          })
-
+    
+  )
+  
+)
 
 ## setting validity for class "Trapezoid"
 setValidity("Trapezoid", function(object){
@@ -48,10 +40,23 @@ setValidity("Trapezoid", function(object){
   test3<-(length(object@xValues)==length(object@yValues))
   if(!test3){return("xValues and yValues are not same length")}
   # are there any repeated xValues
-  test4<-(length(xValues)==length(unique(xValues)))
+  test4<-(length(object@xValues)==length(unique(object@xValues)))
   if(!test4){return("There cannot be repeated xValues")}
   # is result a single numeric value
-  test5<-(is.numeric(result) & length(result)==1)
+  test5<-(is.numeric(object@result) & length(object@result)==1)
   if(!test5){return("result needs to be a single numeric value")}
 }
 )
+
+#' @export
+setMethod("initialize", "Trapezoid", 
+          function(.Object, xValues, yValues, result){
+            .Object@xValues<-xValues
+            .Object@yValues<-yValues
+            .Object@result<-result
+            validObject(.Object)
+            return(.Object)
+          })
+
+
+

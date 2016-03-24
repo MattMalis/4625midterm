@@ -46,13 +46,13 @@ setValidity("Simpson", function(object){
   test3<-(length(object@xValues)==length(object@yValues))
   if(!test3){return("xValues and yValues are not same length")}
   # are there any repeated xValues
-  test4<-(length(xValues)==length(unique(xValues)))
+  test4<-(length(object@xValues)==length(unique(object@xValues)))
   if(!test4){return("There cannot be repeated xValues")}
   # is result a single numeric value
-  test5<-(is.numeric(result) & length(result)==1)
+  test5<-(is.numeric(object@result) & length(object@result)==1)
   if(!test5){return("result needs to be a single numeric value")}
-  # is there an even number of subintervals? (i.e. is length of xValues odd?)
+  # is there an even, non-zero number of subintervals? (i.e. is length of xValues odd?)
   # ...because number of subintervals = length(xValues)-1
-  test6<-(length(xValues)%%2==1)
+  test6<-(length(object@xValues)%%2==1 & length(object@xValues)>2)
   if(!test6){return("Simpson's rule requires an even number of subintervals")}
-}
+})

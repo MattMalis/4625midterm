@@ -14,7 +14,7 @@
 #'@note This function calculates the area under a curve, two different ways!
 #'@examples 
 #'
-#'integral1<-integrateIt(myXvals, myYvals, 'Simp')
+#'myIntegral<-integrateIt(myXvals, myYvals, 'Simp')
 #'@seealso \code{\link{Trapezoid}} \code{\link{Simpson}}  
 #'@rdname integrateIt
 #'@aliases integrateIt,ANY-method 
@@ -25,16 +25,65 @@ setGeneric(name = "integrateIt",
            })
 #'@export
 setMethod(f = "integrateIt",
-          definition = function(xValues, yValues, rule){
+          definition = function(xValues, yValues, rule='Trap'){
             if(rule %in% c('Trap', 'trap', 'TRAP', 'Trapezoid', 'Trapezoidal')){
+              ## create Trapezoid with result=0, so we can run validity checks before doing the work of calculating result
+              newTrap<-new("Trapezoid", xValues=xValues, yValues=yValues, result=0)
+              ## sorting xValues, and ensuring that yValues is sorted so as to maintain the original x-y relationship
+              xSorted<-sort(xValues)
+              ySorted<-NULL
+              ySorted<-sapply(xSorted, function(val){ #moving elementwise through xSorted...
+                x_i<-which(xValues==val, arr.ind=T) #extracting the xValues index that corresponds to the given element of xSorted...
+                return(yValues[x_i]) #extracting the value at that index in yValues, storing in ySorted
+              })
               
+              #STOP TEST
+              
+              
+              
+              ## applying Trapezoidal rule to the values now sorted by xValues
+              h<-(xSorted[length(xSorted)] - xSorted[1]) / (length(xSorted)-1)
+              ## coefficients: (1,2,2,...,2,1)
+              coeffs<-rep(2, length(xSorted))
+              coeffs[1]<-1
+              coeffs[length(xSorted)]<-1
+              ## area = (h/2)(sorted y-values * coefficients)
+              area<-(h/2)(ySorted*coeffs)
+              ## assign area to the result slot of the Trapezoid object, and replace xValues and yValues with the sorted vectors
+              newTrap@result<-area
+              newTrap@xValues<-xSorted
+              newTrap@yValues<-ySorted
+              return(newTrap)
             }
-            else if(rule %in% c('Simp', 'simp', 'SIMP', 'Simpson', 'Simpson's){
-              
+            
+            else if(rule %in% c('Simp', 'simp', 'SIMP', 'Simpson', "Simpson's")){
+              ## create Simpson with result=0, so we can run validity checks before doing the work of calculating result
+              newSimp<-new("Simpson", xValues=xValues, yValues=yValues, result=0)
+              ## sorting xValues, and ensuring that yValues is sorted so as to maintain the original x-y relationship
+              xSorted<-sort(xValues)
+              ySorted<-NULL
+              ySorted<-sapply(xSorted, function(val){ #moving elementwise through xSorted...
+                x_i<-which(xValues==val, arr.ind=T) #extracting the xValues index that corresponds to the given element of xSorted...
+                return(yValues[x_i]) #extracting the value at that index in yValues, storing in ySorted
+              })
+              ## applying Simpon's rule to the values now sorted by xValues
+              ## h=(b-a)/n
+              h<-(xSorted[length(xSorted)] - xSorted[1]) / (length(xSorted)-1)
+              ## coefficients: (1,4,2,4,2,4,...4,2,4,1)
+              coeffs<-rep(NA, length(xSorted))
+              coeffs[1]<-1
+              coeffs[length(xSorted)]<-1
+              coeffs[-c(1, length(xSorted))]<-sapply(2:(length(xSorted)-1), function(num){
+                return(2*(1+(1+num)%%2))
+              })
+              ## area = (h/3)(sorted y-values * coefficients)
+              area<-(h/3)(ySorted*coeffs)
+              ## assign area to the result slot of the Simpson object, and replace xValues and yValues with the sorted vectors
+              newSimp@result<-area
+              newSimp@xValues<-xSorted
+              newSimp@yValues<-ySorted
+              return(newSimp)
             }
             else return("Invalid rule. Rule should be either 'Trap' or 'Simp'.")
-            
-            return(new("Candidate", name=name, delegatesWon=delegatesWon,
-                       party=party))#, delegatesNeeded=totalNeeded(party)))
           })
 
