@@ -41,14 +41,33 @@ integrateIt(xVals1, yVals2, 'Simp')
 ## input values with odd number of sub-intervals
 xVals3<-c(45,63,4,7,99,23)
 yVals3<-c(24,24,6,3,7,89)
+integrateIt(xVals3, yVals3, 'Simp')
+## simp wont work but trap will
 myTrap<-integrateIt(xVals3, yVals3, 'TRAP')
 print(myTrap)
 myTrap
+class(myTrap)
 
-integrateIt(xVals3, yVals3, 'Simp')
+##plotting...
+plot(myTrap)
 
-## should work now
+
+## testing plotting with super small scale
+mySmallTrap<-integrateIt(xVals3/10000, yVals3/10000, 'TRAP')
+print(mySmallTrap)
+mySmallTrap
+plot(mySmallTrap)
+
+## plotting with negative x-values
+myNegativeTrap<-integrateIt(-(xVals3), yVals3, 'TRAP')
+print(myNegativeTrap)
+myNegativeTrap
+plot(myNegativeTrap)
+
+
+## simp should work now
 xVals4<-c(xVals3, 120)
 yVals4<-c(yVals3, 150)
 print(integrateIt(xVals4, yVals4, "Simpson's"))
+
 

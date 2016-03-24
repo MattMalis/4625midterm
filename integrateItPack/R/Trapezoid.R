@@ -64,3 +64,22 @@ print.Trapezoid<-function(trap){
   paste("Integrated value, according to Trapezoidal rule, is: ", round(trap@result,3))
 }
 
+#' @export
+plot.Trapezoid<-function(trap){
+  
+  plot(NULL, xlim=c((min(trap@xValues)-(max(trap@xValues)-min(trap@xValues))/10),  
+                    (max(trap@xValues)+(max(trap@xValues)-min(trap@xValues))/10)), 
+       ## setting xlim and ylim as a function of the min and max x and y values
+       ylim=c((min(trap@yValues)-(max(trap@yValues)-min(trap@yValues))/10),  
+              (max(trap@yValues)+(max(trap@yValues)-min(trap@yValues))/10)),
+       xlab = "x-values", ylab="y-values", main="Integral Approximation with Trapezoidal Rule"
+       )
+       
+  polygon(c(trap@xValues[1],trap@xValues,trap@xValues[length(trap@xValues)]),
+          c(0,trap@yValues,0))
+  for(i in 2:(length(trap@xValues)-1)){
+    segments(trap@xValues[i],trap@yValues[i],trap@xValues[i],0)
+  }
+  
+}
+
