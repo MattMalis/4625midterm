@@ -59,3 +59,9 @@ setMethod("initialize", "Simpson",
             validObject(.Object)
             return(.Object)
           })
+
+
+#' @export
+print.Simpson<-function(simp){
+  paste("Integrated value, according to Simpson's rule, is: ", round(simp@result,3))
+}

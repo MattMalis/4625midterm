@@ -30,11 +30,6 @@ setMethod(f = "integrateIt",
               ## create Trapezoid with result=0, so we can run validity checks before doing the work of calculating result
               newTrap<-new("Trapezoid", xValues=xValues, yValues=yValues, result=0)
               
-              
-              ## TEST PRINT
-              print(newTrap)
-              
-              
               ## sorting xValues, and ensuring that yValues is sorted so as to maintain the original x-y relationship
               xSorted<-sort(xValues)
               ySorted<-NULL
@@ -47,35 +42,22 @@ setMethod(f = "integrateIt",
               newTrap@xValues<-xSorted
               newTrap@yValues<-ySorted
               
-              ## TEST PRINT
-              print(newTrap)
-              
-              
               ## applying Trapezoidal rule to the values now sorted by xValues
               h <- (xSorted[length(xSorted)]-xSorted[1]) /(length(xSorted)-1)
-              
-              ## TEST PRINT 
-              print(h)
-              
+       
               ## coefficients: (1,2,2,...,2,1)
               coeffs<-rep(2, length(xSorted))
               coeffs[1]<-1
               coeffs[length(xSorted)]<-1
               
-              ## TEST PRINT
-              print(coeffs)
               
               ## area = (h/2)(sorted y-values * coefficients)
               area<-(h/2)*sum(ySorted*coeffs)
               
-              ## TEST PRINT
-              print(area)
-              
               ## assign area to the result slot of the Trapezoid object
               newTrap@result<-area
      
-              #TEST PRINT
-              print(newTrap)
+              return(newTrap)
             }
             
             else if(rule %in% c('Simp', 'simp', 'SIMP', 'Simpson', "Simpson's")){

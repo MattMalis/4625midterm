@@ -59,4 +59,8 @@ setMethod("initialize", "Trapezoid",
           })
 
 
+#' @export
+print.Trapezoid<-function(trap){
+  paste("Integrated value, according to Trapezoidal rule, is: ", round(trap@result,3))
+}
 
