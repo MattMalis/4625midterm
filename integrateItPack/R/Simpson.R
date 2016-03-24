@@ -25,14 +25,6 @@ setClass(Class = "Simpson", representation = representation(
     result = c()
   ))
 
-#' @export
-setMethod("initialize", "Simpson", 
-          function(.Object, xValues, yValues, result){
-            .Object@xValues<-xValues
-            .Object@yValues<-yValues
-            .Object@result<-result
-            return(.Object)
-          })
 
 ## setting validity for class "Simpson"
 setValidity("Simpson", function(object){
@@ -56,3 +48,14 @@ setValidity("Simpson", function(object){
   test6<-(length(object@xValues)%%2==1 & length(object@xValues)>2)
   if(!test6){return("Simpson's rule requires an even number of subintervals")}
 })
+
+
+#' @export
+setMethod("initialize", "Simpson", 
+          function(.Object, xValues, yValues, result){
+            .Object@xValues<-xValues
+            .Object@yValues<-yValues
+            .Object@result<-result
+            validObject(.Object)
+            return(.Object)
+          })
