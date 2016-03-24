@@ -74,9 +74,12 @@ plot.Trapezoid<-function(trap){
               (max(trap@yValues)+(max(trap@yValues)-min(trap@yValues))/10)),
        xlab = "x-values", ylab="y-values", main="Integral Approximation with Trapezoidal Rule"
        )
+  ## plotting points
   points(trap@xValues, trap@yValues, pch=21)    
+  ## plotting outer polygon
   polygon(c(trap@xValues[1],trap@xValues,trap@xValues[length(trap@xValues)]),
           c(0,trap@yValues,0))
+  ## separating individual trapezoids with vertical lines
   for(i in 2:(length(trap@xValues)-1)){
     segments(trap@xValues[i],trap@yValues[i],trap@xValues[i],0)
   }

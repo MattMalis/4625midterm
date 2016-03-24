@@ -1,5 +1,5 @@
 Package: integrateItPack
-Title: Adding and subtracting squared values
+Title: pproximate an integral with Simpson’s rule or Trapezoidal Rule
 Version: 0.1
 Author: Matt Malis
 Maintainer: Matt Malis <malis.matt@gmail.com>

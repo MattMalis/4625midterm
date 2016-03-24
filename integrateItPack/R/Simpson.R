@@ -76,8 +76,11 @@ plot.Simpson<-function(simp){
               (max(simp@yValues)+(max(simp@yValues)-min(simp@yValues))/10)),
        xlab = "x-values", ylab="y-values", main="Integral Approximation with Simpson's Rule"
   )
+  ## plotting points
   points(simp@xValues, simp@yValues, pch=21)    
   
+  ## finding quadratic models from sets of 3 consecutive points
+  ## predicting a y-values based on the quadratic models, and plotting
   for (i in 1:(floor(length(simp@xValues))/2)){
     model<-lm(simp@yValues[(2*i-1):(2*i+1)] ~ simp@xValues[(2*i-1):(2*i+1)] + (simp@xValues^2)[(2*i-1):(2*i+1)] )
     quad.coeffs<-coefficients(model)
@@ -87,7 +90,7 @@ plot.Simpson<-function(simp){
     })
     lines(xSeq,ySeq)
   }
-  
+  ## drawing the vertical and horizontal lines to close off the shape
     segments(simp@xValues[1],simp@yValues[1],simp@xValues[1],0)
     segments(simp@xValues[length(simp@xValues)],simp@yValues[length(simp@xValues)],simp@xValues[length(simp@xValues)],0)
     segments(simp@xValues[1],0,simp@xValues[length(simp@xValues)],0)

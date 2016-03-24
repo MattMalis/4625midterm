@@ -18,6 +18,7 @@ library(integrateItPack)
 
 ?integrateIt
 ?Trapezoid
+?Simpson
 
 ## testing
 
