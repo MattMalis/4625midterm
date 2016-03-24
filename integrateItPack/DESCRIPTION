@@ -1,13 +1,11 @@
 Package: integrateItPack
-Title: pproximate an integral with Simpson’s rule or Trapezoidal Rule
-Version: 0.1
-Author: Matt Malis
-Maintainer: Matt Malis <malis.matt@gmail.com>
-Description: Approximate an integral with Simpson’s rule or Trapezoidal Rule
+Title: Approximate an Integral
+Version: 0.0.0.9000
+Authors: Matt Malis <malis.matt@gmail.com>
+Description: Approximate an integral using either Simpson’s Rule or Trapezoidal
+    Rule, and plot the results.
 Depends:
-    R (>= 3.0.0),
-    methods
-License: GPL (>= 2)
-Suggests:
-    devtools
+    R (>= 3.2.2)
+License: WUSTL
+LazyData: true
 RoxygenNote: 5.0.1
